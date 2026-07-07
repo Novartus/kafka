@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franz Kafka — On the Law, Guilt, and the Office You Cannot Find</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#242220;
+    --paper:#e3dfd2;
+    --paper-dark:#d2cdba;
+    --paper-darker:#bfb8a2;
+    --stamp:#a23b34;
+    --grey-green:#4b544c;
+    --line: rgba(36,34,32,0.2);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'PT Serif', serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  ::selection{ background: var(--stamp); color: var(--paper); }
+  a{ color: var(--stamp); }
+
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 28px 120px; position:relative; }
+
+  /* ---------- Masthead: a case-file cover sheet ---------- */
+  header.masthead{
+    position:relative;
+    padding: 56px 20px 30px;
+    border: 1px solid var(--ink);
+    margin: 40px 0 6px;
+    background: rgba(255,255,255,0.15);
+  }
+  .case-no{
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.1em;
+    color: var(--grey-green); text-align:center; margin-bottom:22px;
+  }
+  h1.title{
+    font-family:'Special Elite', monospace;
+    font-weight: 400;
+    font-size: clamp(30px, 6.4vw, 50px);
+    letter-spacing: 0.02em;
+    margin: 0;
+    text-align:center;
+    line-height:1.15;
+  }
+  .subtitle{
+    font-family:'PT Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    color:#40382f;
+    margin-top: 16px;
+    text-align:center;
+    opacity:0.85;
+  }
+  .masthead-meta{
+    display:flex; justify-content:space-between; margin-top:26px;
+    font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--grey-green); letter-spacing:0.04em;
+  }
+  .stamp{
+    position:absolute; top:22px; right:-6px;
+    border: 3px solid var(--stamp); color: var(--stamp);
+    font-family:'Special Elite', monospace; font-size: 13px; letter-spacing:0.12em;
+    padding: 8px 14px; transform: rotate(-9deg);
+    opacity:0.82; text-align:center; line-height:1.3;
+    background: rgba(163,59,52,0.03);
+  }
+  .stamp small{ display:block; font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:0.05em; margin-top:3px; }
+
+  /* ---------- Hero thesis ---------- */
+  .thesis{ padding: 52px 0 40px; border-bottom: 1px solid var(--line); }
+  .thesis .label{
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    color: var(--stamp); margin-bottom: 20px; display:block;
+  }
+  #thesis-text{
+    font-family:'Special Elite', monospace; font-weight:400;
+    font-size: clamp(17px, 2.5vw, 22px); line-height:1.7; min-height: 260px;
+  }
+  #thesis-text .cursor{
+    display:inline-block; width:2px; height:1em; background:var(--ink);
+    vertical-align:-0.15em; animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .strike{ position:relative; color:#6e675c; }
+  .strike::after{
+    content:""; position:absolute; left:-2px; right:-2px; top:52%;
+    height:1.5px; background: var(--stamp); transform: rotate(-1deg);
+  }
+  .insert{ color: var(--stamp); }
+
+  section{ padding: 50px 0; border-bottom: 1px solid var(--line); position:relative; }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom: 24px; }
+  .section-num{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--grey-green); }
+  h2{ font-family:'Special Elite', monospace; font-weight:400; font-size: 22px; margin:0; letter-spacing:0.01em; }
+
+  .belief p{ margin: 0 0 16px; }
+
+  blockquote.line{
+    margin: 22px 0 6px; font-family:'Special Elite', monospace; font-weight:400;
+    font-size: clamp(16px, 2.2vw, 19px); line-height:1.6; color:var(--ink);
+    padding-left: 18px; border-left: 2px solid var(--stamp);
+  }
+  blockquote.line + cite{
+    font-family:'JetBrains Mono', monospace; font-style:normal; font-size:11px;
+    letter-spacing:0.06em; color: var(--grey-green); padding-left: 20px; display:block; margin-bottom: 6px;
+  }
+
+  .marginal{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color: var(--grey-green);
+    line-height:1.6; border:1px solid var(--line); padding:14px 16px; margin: 24px 0 0;
+    background: rgba(0,0,0,0.02);
+  }
+  .marginal::before{ content:"filed separately — "; color:var(--stamp); }
+
+  /* ---------- The Application (interactive) ---------- */
+  .form-box{
+    border: 1px solid var(--ink); padding: 26px 24px; background: rgba(255,255,255,0.18);
+  }
+  .form-box .office{
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.1em; color:var(--grey-green);
+    text-transform:uppercase; margin-bottom:18px;
+  }
+  .field{ margin-bottom: 16px; }
+  .field label{
+    display:block; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.06em;
+    color: var(--grey-green); margin-bottom: 6px; text-transform:uppercase;
+  }
+  .field input, .field select{
+    width:100%; background: transparent; border:1px solid var(--ink); padding:10px 12px;
+    font-family:'PT Serif', serif; font-size:15px; color:var(--ink);
+  }
+  .field input:focus, .field select:focus{ outline:2px solid var(--stamp); outline-offset:2px; }
+  .form-actions{ display:flex; justify-content:space-between; align-items:center; margin-top: 20px; }
+  .form-hint{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--grey-green); }
+  button.submit{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    background: var(--ink); color: var(--paper); border:none; padding: 12px 22px; cursor:pointer;
+  }
+  button.submit:hover{ background: var(--stamp); }
+  button.submit:focus-visible{ outline:2px solid var(--stamp); outline-offset:3px; }
+
+  .attempts{ margin-top: 30px; }
+  .attempt-entry{
+    display:grid; grid-template-columns: 70px 1fr; gap:16px;
+    padding: 16px 0; border-top:1px dashed var(--line);
+  }
+  .attempt-entry .num{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--stamp); }
+  .attempt-entry .msg{ font-family:'Special Elite', monospace; font-size:14.5px; line-height:1.6; }
+
+  footer{
+    text-align:center; padding: 50px 20px 0;
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--grey-green); letter-spacing:0.06em;
+  }
+
+  @media (max-width: 560px){
+    .attempt-entry{ grid-template-columns: 1fr; }
+    .stamp{ position:static; display:inline-block; margin-top:18px; transform: rotate(-4deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #thesis-text .cursor{ animation:none; }
+    * { scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="case-no">FILE NO. K — RE-OPENED WITHOUT EXPLANATION</div>
+    <h1 class="title">Franz Kafka</h1>
+    <div class="subtitle">— on the Law, on guilt without a charge, and on the office you were told exists —</div>
+    <div class="masthead-meta">
+      <span>Prague. An insurance clerk, among other things.</span>
+      <span>Correspondence unanswered as of this printing</span>
+    </div>
+    <div class="stamp">RECEIVED<small>NOT YET REVIEWED</small></div>
+  </header>
+
+  <section class="thesis" aria-label="Central conviction">
+    <span class="label">The Charge Against Me, As Best I Understand It</span>
+    <div id="thesis-text"></div>
+  </section>
+
+  <section id="law">
+    <div class="section-head">
+      <span class="section-num">I.</span>
+      <h2>On the Law, and the Door Meant Only for You</h2>
+    </div>
+    <div class="belief">
+      <p>I do not believe the Law is hidden from us by accident, nor that it withholds itself out of cruelty exactly. I believe every person is given a door built to their own measure, and told, correctly, that it stands open — and that the terrible part is not the waiting, but discovering, too late, that the door was never for anyone else to walk through, and closes the moment you stop asking.</p>
+      <p>We assume the officials above us understand the system better than we do. I have never found evidence of this. I have only found more officials, each one certain that the answer sits with someone further up the stairs.</p>
+      <blockquote class="line">Before the Law stands a doorkeeper.</blockquote>
+      <cite>— "Before the Law"</cite>
+    </div>
+  </section>
+
+  <section id="guilt">
+    <div class="section-head">
+      <span class="section-num">II.</span>
+      <h2>On Guilt, Held Without a Charge</h2>
+    </div>
+    <div class="belief">
+      <p>A man can be arrested without having done anything wrong, and the worst of it is not the arrest — it is how quickly he begins searching his own memory for the crime, certain the court would not have bothered with him otherwise. I have watched this happen in myself more than once: guilt arriving first, and the reason for it arriving never.</p>
+      <p>We are trained from childhood to assume the accusation is more reliable than our own account of ourselves. I no longer think this a mark of good character. I think it is simply what a lifetime of small tribunals — a father, a school, an office — teaches a person to expect.</p>
+      <div class="marginal">it is often safer to be found guilty of something named than innocent of something never specified — at least a named charge can, in principle, be answered.</div>
+    </div>
+  </section>
+
+  <section id="family">
+    <div class="section-head">
+      <span class="section-num">III.</span>
+      <h2>On the Father, the Family, and Waking Changed</h2>
+    </div>
+    <div class="belief">
+      <p>I have written to my father a letter longer than most of my books, and I do not believe it was ever truly read, in the sense of being received rather than merely returned to sender with a verdict already decided. A child does not need to be struck to learn that his existence is a kind of trespass; he only needs to be measured, once, against a standard he was never told he was competing for.</p>
+      <p>I once wrote of a man who wakes to find he has become something his family can no longer recognize as belonging to them. I did not think this required much invention. I have felt, at my own table, exactly that unrecognized.</p>
+      <blockquote class="line">A cage went in search of a bird.</blockquote>
+      <cite>— from the notebooks</cite>
+    </div>
+  </section>
+
+  <section id="writing">
+    <div class="section-head">
+      <span class="section-num">IV.</span>
+      <h2>On Writing, and What a Book Is For</h2>
+    </div>
+    <div class="belief">
+      <p>I do not write to be understood, and I am suspicious of books that leave a reader entirely comfortable at the end of them. A book that only confirms what a person already believed has not done its work. I want the kind of book that arrives, uninvited, like a summons — one you cannot simply set down and return to your life unchanged, because it has already gotten in.</p>
+      <blockquote class="line">A book must be the axe for the frozen sea within us.</blockquote>
+      <cite>— letter to Oskar Pollak</cite>
+    </div>
+  </section>
+
+  <section id="freedom">
+    <div class="section-head">
+      <span class="section-num">V.</span>
+      <h2>On Freedom, and Why We Rarely Take It</h2>
+    </div>
+    <div class="belief">
+      <p>I am not certain freedom is the relief people imagine it to be. A cell has walls, but it also has a shape you come to know by heart, and a great many people, offered the door, will ask first whether someone can confirm it is really permitted. I have built entire lives, my own included, around waiting for a permission that was never going to arrive from outside.</p>
+      <blockquote class="line">It is often safer to be in chains than to be free.</blockquote>
+      <cite>— The Trial</cite>
+    </div>
+  </section>
+
+  <section id="apply" class="ask-box">
+    <div class="section-head">
+      <span class="section-num">VI.</span>
+      <h2>Submit an Application, If You Insist</h2>
+    </div>
+    <p style="margin-top:-10px; color:#40382f;">You are welcome to apply to see the file, or to have your case heard, or simply to understand what you are accused of. The form below has been provided for that purpose. Whether it leads anywhere is not something I am able to promise.</p>
+
+    <div class="form-box">
+      <div class="office" id="office-label">Office of First Inquiries — Window 3</div>
+      <div class="field">
+        <label for="app-name">Your name, as it appears on no document in particular</label>
+        <input type="text" id="app-name" placeholder="K.">
+      </div>
+      <div class="field">
+        <label for="app-reason">Reason for your application</label>
+        <input type="text" id="app-reason" placeholder="To understand the charge">
+      </div>
+      <div class="form-actions">
+        <span class="form-hint">this form is not retained after you leave the page</span>
+        <button class="submit" id="app-submit">Submit application</button>
+      </div>
+    </div>
+
+    <div class="attempts" id="attempts" aria-live="polite"></div>
+  </section>
+
+  <footer>
+    Filed without confirmation of receipt — Prague
+  </footer>
+</div>
+
+<script>
+  // ---- Signature element: the self-revising thesis ----
+  const target = document.getElementById('thesis-text');
+
+  const script = [
+    { type: 'write', text: 'I have been informed that I am guilty, and that the specifics are not necessary for me to know' },
+    { type: 'pause', ms: 480 },
+    { type: 'strike', text: ' — though I notice this is precisely the sentence a guilty man would write to sound falsely accused.' },
+    { type: 'pause', ms: 460 },
+    { type: 'write', text: ' What I can say honestly is that I have spent most of my life waiting outside offices that were, I was assured, open, ' },
+    { type: 'write', text: 'filling forms whose purpose no clerk could quite explain, ' },
+    { type: 'strike', text: 'and concluding, wrongly I now think, that the fault for this arrangement must somehow be mine.' },
+    { type: 'pause', ms: 460 },
+    { type: 'insert', text: ' I no longer believe the fault is mine. I believe the door was real, the summons was real, and no one, anywhere in the building, was ever going to tell me so.' }
+  ];
+
+  function typeNode(node, text, className){
+    return new Promise(resolve => {
+      let idx = 0;
+      const span = document.createElement('span');
+      if(className) span.className = className;
+      node.appendChild(span);
+      const speed = 15;
+      function step(){
+        if(idx < text.length){
+          span.textContent += text[idx];
+          idx++;
+          setTimeout(step, speed + Math.random()*13);
+        } else { resolve(span); }
+      }
+      step();
+    });
+  }
+
+  async function runScript(){
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    for(const step of script){
+      cursor.remove();
+      if(step.type === 'write'){
+        await typeNode(target, step.text, null);
+      } else if(step.type === 'insert'){
+        await typeNode(target, step.text, 'insert');
+      } else if(step.type === 'strike'){
+        const span = await typeNode(target, step.text, null);
+        await new Promise(r => setTimeout(r, 420));
+        span.classList.add('strike');
+      } else if(step.type === 'pause'){
+        target.appendChild(cursor);
+        await new Promise(r => setTimeout(r, step.ms));
+        cursor.remove();
+      }
+    }
+    target.appendChild(cursor);
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    target.innerHTML = 'What I can say honestly is that I have spent most of my life waiting outside offices that were, I was assured, open, filling forms whose purpose no clerk could quite explain. I no longer believe the fault is mine. I believe the door was real, the summons was real, and no one, anywhere in the building, was ever going to tell me so.';
+  } else {
+    runScript();
+  }
+
+  // ---- The endless application ----
+  const offices = [
+    'Office of First Inquiries — Window 3',
+    'Department of Records, Sub-Basement — Window 1',
+    'Bureau of Reconsiderations — Window 7 (moved from Window 12)',
+    'Office of the Assistant to the Assistant Registrar',
+    'Annex Building, Window Unmarked',
+    'Office of First Inquiries — Window 3 (again, a different clerk)',
+    'Department for Matters Not Yet Classified'
+  ];
+  const messages = [
+    'Your application has been received and logged as pending. The correct office, however, is not this one.',
+    'This form is one revision behind. The current version is available only from the office that issued the previous one.',
+    'Your application cannot be processed until the reason for the application has itself been approved, by a separate application.',
+    'You have been misdirected in good faith. The clerk who could confirm this is currently occupied with an unrelated matter.',
+    'Noted, filed, and forwarded. Forwarding, in this building, is not the same as being seen.',
+    'The office you require exists. You have simply been given, again, the address of the one before it.',
+    'Your case has been added to a list. The list is real. Its order is not something anyone here can explain.'
+  ];
+
+  const attemptsBox = document.getElementById('attempts');
+  const officeLabel = document.getElementById('office-label');
+  const nameInput = document.getElementById('app-name');
+  const reasonInput = document.getElementById('app-reason');
+  let count = 0;
+
+  document.getElementById('app-submit').addEventListener('click', () => {
+    const name = nameInput.value.trim() || 'K.';
+    const reason = reasonInput.value.trim() || 'unspecified';
+    count++;
+    const msg = messages[Math.floor(Math.random()*messages.length)];
+    const entry = document.createElement('div');
+    entry.className = 'attempt-entry';
+    entry.innerHTML = '<div class="num">' + String(count).padStart(3,'0') + '</div><div class="msg"></div>';
+    entry.querySelector('.msg').textContent = name + ' — "' + reason + '" — ' + msg;
+    attemptsBox.prepend(entry);
+
+    const nextOffice = offices[count % offices.length];
+    officeLabel.textContent = nextOffice;
+    reasonInput.value = '';
+  });
+
+  reasonInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' && (e.metaKey || e.ctrlKey)){
+      document.getElementById('app-submit').click();
+    }
+  });
+</script>
+</body>
+</html>
